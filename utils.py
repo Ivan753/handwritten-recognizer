@@ -52,7 +52,8 @@ def img2lsit(path): #"dataset/Sample001/img001-001.png"
     for i in range(img.size[1]):
         res.append([])
         for j in range(img.size[0]):
-            res[i].append(img.getpixel((j, i))[0])
+            # res[i].append(img.getpixel((j, i))[0])
+            res[i].append([img.getpixel((j, i))[0]])
     
     return res
     
@@ -79,11 +80,11 @@ def create_dataset():
     # pickle.dump(y, pickle_file)
 
 
-with open('x.txt', 'rb') as pickle_file:
-    X = pickle.load(pickle_file)
+with open('x1.txt', 'rb') as pickle_file:
+    X_train = pickle.load(pickle_file)
 
-with open('y.txt', 'rb') as pickle_file:
-    y = pickle.load(pickle_file)
+with open('y1.txt', 'rb') as pickle_file:
+    y_train = pickle.load(pickle_file)
 
 
     
