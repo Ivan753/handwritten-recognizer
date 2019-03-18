@@ -69,4 +69,5 @@ class Model(object):
 
     def evaluate(self, X_test, Y_test):
         score = self.model.evaluate(X_test, Y_test, verbose=0)
-        print("%s: %.2f%%" % (self.model.metrics_names[1], score[1] * 100))
+        print("%s: %.2f%%" % (self.model.metrics_names[1], score[1]*100))
+
