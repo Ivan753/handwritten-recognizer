@@ -2,6 +2,12 @@
 EnglishHnd/
 dataset/
 
+# work files
+img.png
+model.h5
+model1.h5
+model70_.h5
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
