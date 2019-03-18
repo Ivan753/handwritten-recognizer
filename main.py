@@ -1,6 +1,6 @@
 from tkinter import *
 from PIL import ImageGrab, Image, ImageDraw
-from  utils import create_new_img, img2lsit, y2letter
+from utils import create_new_img, img2lsit, y2letter
 from model import Model
 import numpy as np
 
