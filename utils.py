@@ -2,6 +2,7 @@ import PIL
 from PIL import Image
 import pickle
 import os
+from sklearn.model_selection import train_test_split
 
 # resize images
 def create_new_img(path, base_path, new_base, height):
@@ -44,7 +45,7 @@ def resize_images():
         create_new_img(line[:-1], base_path, new_base, base_width)
 
 
-def img2lsit(path): #"dataset/Sample001/img001-001.png"
+def img2lsit(path):
     res = []
     
     img = Image.open(path)
@@ -52,8 +53,7 @@ def img2lsit(path): #"dataset/Sample001/img001-001.png"
     for i in range(img.size[1]):
         res.append([])
         for j in range(img.size[0]):
-            # res[i].append(img.getpixel((j, i))[0])
-            res[i].append([img.getpixel((j, i))[0]])
+            res[i].append([(img.getpixel((j, i))[0] - 127.5) / 255])
     
     return res
     
@@ -70,22 +70,37 @@ def create_dataset():
             y[i*55+j][i] = 1
         
     return res, y
+
+
+def y2letter(i):
+    letters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+               'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+                ]
+    return letters[i]
     
+ 
+def pickle_dump_dataset():
+    X, y = create_dataset()
+
+    with open('x.txt', 'wb') as pickle_file:
+        pickle.dump(X, pickle_file)
+    with open('y.txt', 'wb') as pickle_file:
+        pickle.dump(y, pickle_file)
+
+
+def pickle_read_dataset():
+    with open('x.txt', 'rb') as pickle_file:
+        X = pickle.load(pickle_file)
+    with open('y.txt', 'rb') as pickle_file:
+        y = pickle.load(pickle_file)
     
-# X, y = create_dataset()
-
-# with open('x.txt', 'wb') as pickle_file:
-    # pickle.dump(X, pickle_file)
-# with open('y.txt', 'wb') as pickle_file:
-    # pickle.dump(y, pickle_file)
+    return X, y
 
 
-with open('x1.txt', 'rb') as pickle_file:
-    X_train = pickle.load(pickle_file)
+def get_samples():
+    X, y = pickle_read_dataset()
+    X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=0.1, random_state=241)
+    return X_train, X_test, Y_train, Y_test
 
-with open('y1.txt', 'rb') as pickle_file:
-    y_train = pickle.load(pickle_file)
-
-
-    
     
