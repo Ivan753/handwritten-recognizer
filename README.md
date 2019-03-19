@@ -6,6 +6,11 @@
 pip install -r requirements.txt
 ```
 Рекомендуется также установить виртуальное окружение
+### Совместимость
+Windows, MacOS. Для работы в Linux необходимо импортировать pyscreenshot как ImageGrap
+```python
+import pyscreenshot as ImageGrap
+```
 ## Запуск
 ### Готовая модель
 Обученная модель находится в файле model70.h5, перед запуском необходимо её скачать
